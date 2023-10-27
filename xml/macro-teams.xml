@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<Command>
+    <UserInterface>
+        <Extensions>
+            <Panel>
+                <Save>
+                    <PanelId>join-teams</PanelId>
+                    <body>&lt;Extensions&gt;
+                          &lt;Version&gt;1.7&lt;/Version&gt;
+                          &lt;Panel&gt;
+                            &lt;Icon&gt;Custom&lt;/Icon&gt;
+                            &lt;Type&gt;Home&lt;/Type&gt;
+                            &lt;ActivityType&gt;Custom&lt;/ActivityType&gt;
+                            &lt;Name&gt;Start Teams Meeting&lt;/Name&gt;
+                            &lt;PanelId&gt;join-teams&lt;/PanelId&gt;
+                            &lt;Origin&gt;local&lt;/Origin&gt;
+                            &lt;Order&gt;1&lt;/Order&gt;
+                            &lt;Color&gt;#A866FF&lt;/Color&gt;
+                            &lt;CustomIcon&gt;
+                                &lt;Id&gt;4558c46a4eae0420a8bce6230a1a315edd285830d511983e11a46595ce0bc556&lt;/Id&gt;
+                            &lt;/CustomIcon&gt;
+                          &lt;Visibility&gt;Auto&lt;/Visibility&gt;
+                          &lt;/Panel&gt;
+                          &lt;/Extensions&gt;</body>
+                </Save>
+            </Panel>
+        </Extensions>
+    </UserInterface>
+
+    <Macros>
+        <Macro>
+            <Save>
+                <Name>join-teams</Name>
+                <Overwrite>True</Overwrite>
+                <body>
+import xapi from 'xapi';
+
+
+const KEYBOARD_TYPES = {
+  NUMERIC: 'Numeric',
+  SINGLELINE: 'SingleLine',
+  PASSWORD: 'Password',
+  PIN: 'PIN',
+};
+
+const CALL_TYPES = {
+  AUDIO: 'Audio',
+  VIDEO: 'Video',
+};
+
+const MEETING_ID = 'meetingID';
+const INROOMCONTROL_AUDIOCONTROL_PANELID = 'join-teams'; /* This will be the Panel/Widget ID you are using in the UI Extension */
+const postfix = '.[COMPANY]@m.webex.com'; /* Define the domain for the meeting service you are using.  Eg. @zoomcrc.com, @MSTeams.tenant, @yourbridge.com */
+
+/* Use these to check that its a valid number (depending on what you want to allow users to call */
+const REGEXP_URLDIALER = /([a-zA-Z0-9@_\-\.]+)/; /* Use this one if you want to allow URL dialling */
+const REGEXP_NUMERICDIALER =  /^([0-9]{5,12})$/; /* Use this one if you want to limit calls to numeric only. In this example, require number to be between 3 and 10 digits. */
+
+var meetingID = '1234567890';
+
+
+
+function getMeetingID(text){
+
+  xapi.Command.UserInterface.Message.TextInput.Display({
+    InputType: KEYBOARD_TYPES.NUMERIC,
+    Placeholder: "Beispiel/Example: 1234567890",
+    Title: "Start [COMPANY] Teams Meeting", /* Create a custom title for your meeting Input Display here */
+    Text: text,
+    SubmitText: "Start",
+    FeedbackId: MEETING_ID,
+    }).catch((error) => { console.error(error); });
+}
+function showDialPad(title, text, duration) {
+  xapi.Command.UserInterface.Message.Alert.Display({
+    Title: title,
+    Text: text,
+    Duration: duration,
+  });
+}
+
+/* This is the listener for the in-room control panel button that will trigger the dial panel to appear */
+
+xapi.Event.UserInterface.Extensions.Panel.Clicked.on((event) => {
+    if(event.PanelId === INROOMCONTROL_AUDIOCONTROL_PANELID){
+         getMeetingID("Geben Sie die Videokonferenz-ID aus Ihrer Einladung ein. &lt;br&gt; &lt;br&gt; Enter the video conference ID from your invitation." );
+    }
+});
+
+
+/* Event listener for the dial pad being posted */
+
+xapi.Event.UserInterface.Message.TextInput.Response.on((event) => {
+    switch(event.FeedbackId){
+        case MEETING_ID:
+          const regex = REGEXP_URLDIALER; /* Change this to whatever filter you want to check for validity */
+          const match = regex.exec(event.Text);
+          console.log('match', match);   
+          if (match !== null) {
+			      meetingID = match[1];
+            const Number =  meetingID + postfix;
+            xapi.Command.Dial({ Number });
+          }
+          else{
+              showDialPad("ERROR", "Die Meeting-ID besteht aus 5-12 Ziffern. Bitte geben Sie die Meeting-ID erneut ein", 8 );
+          }
+          break;
+    }
+});
+                </body>
+            </Save>
+            <Activate>
+                <Name>join-teams</Name>
+            </Activate>    
+        </Macro>
+        <Runtime>
+            <Restart command='True'></Restart>
+        </Runtime>
+    </Macros>
+</Command>

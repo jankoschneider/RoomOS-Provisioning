@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Configuration>
+    <Time>
+        <OfficeHours>
+            <Enabled>False</Enabled>
+        </OfficeHours>
+    </Time>
+</Configuration>

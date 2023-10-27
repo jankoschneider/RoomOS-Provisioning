@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Configuration>
+    <Video>
+        <Selfview>
+            <Default>
+                <Mode>On</Mode>
+				<FullscreenMode>off</FullscreenMode>
+				<OnMonitorRole>First</OnMonitorRole>
+				<PIPPosition>UpperRight</PIPPosition>
+            </Default>
+            <OnCall>
+                <Mode>Off</Mode>
+				<Duration>10</Duration>
+            </OnCall>
+        </Selfview>
+    </Video>
+</Configuration>

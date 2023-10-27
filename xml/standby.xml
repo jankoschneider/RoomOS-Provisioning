@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Configuration>
+    <Standby>
+		<Control>On</Control>
+		<Delay>10</Delay>
+		<Halfwake>
+			<Mode>Manual</Mode>
+		</Halfwake>
+        <WakeupOnMotionDetection>Off</WakeupOnMotionDetection>
+    </Standby>
+</Configuration>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Configuration>
+    <Proximity>
+        <Mode>Off</Mode>
+		<Services>
+			<CallControl>Disabled</CallControl>
+			<Contentshare>
+				<FromClients>Disabled</FromClients>
+				<ToClients>Disabled</ToClients>
+			</Contentshare>
+		</Services>
+    </Proximity>
+	<UserInterface>
+		<Proximity>
+			<Notifications>Off</Notifications>
+		</Proximity>
+	</UserInterface>
+</Configuration>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Configuration>
+    <Audio>
+        <Input>
+            <Microphone item="3">
+				<EchoControl>
+					<Dereverberation>On</Dereverberation>
+					<Mode>On</Mode>
+					<NoiseReduction>On</NoiseReduction>
+				</EchoControl>
+			</Microphone>
+        </Input>
+    </Audio>
+</Configuration>

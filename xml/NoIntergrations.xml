@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Configuration>
+	<UserInterface>
+		<Features>
+			<Call>
+				<JoinGoogleMeet>Hidden</JoinGoogleMeet>
+				<JoinWebex>Auto</JoinWebex>
+				<JoinZoom>Hidden</JoinZoom>
+				<Webcam>Hidden</Webcam>
+			</Call>
+		</Features>
+	</UserInterface>
+</Configuration>

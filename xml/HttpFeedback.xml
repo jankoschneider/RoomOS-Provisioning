@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Command>
+    <HttpFeedback>
+        <Deregister>
+            <FeedbackSlot>3</FeedbackSlot>
+        </Deregister>
+    </HttpFeedback>
+</Command>

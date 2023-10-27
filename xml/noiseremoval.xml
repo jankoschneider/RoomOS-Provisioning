@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Configuration>
+    <Audio>
+        <Microphones>
+            <NoiseRemoval>
+				<Mode>Enabled</Mode>
+			</NoiseRemoval>
+        </Microphones>
+    </Audio>
+</Configuration>

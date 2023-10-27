@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Configuration>
+    <UserInterface>
+        <HomeScreen>
+            <Dashboard>Off</Dashboard>
+        </HomeScreen>
+    </UserInterface>
+</Configuration>
