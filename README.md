@@ -1,1 +1,3 @@
 # RoomOS-Provisioning
+
+This is a little helping Tool to bulk provision Cisco RoomOS Video Coonferecing Devices. More to come...
